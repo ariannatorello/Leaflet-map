@@ -1,0 +1,55 @@
+
+<html>
+
+    <head>
+        <title>Cherry Blossoms at UNC-CH</title>
+    </head>
+    
+    <body>
+        <center><h1>Flowering Cherry Blossom Trees at UNC-CH</h1>
+        <p>The map below is an interactive display, portraying the recorded locations of flowering cherry blossom trees on the campus of the University of North Carolina at Chapel Hill.</p>
+        </center>
+    </body>
+    
+    </html>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-
+    puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrD
+    h+drA==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-
+    QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw
+    5lwrg==" crossorigin=""></script>
+    <script
+        src="data/flowering_cherries_4326.geojson"></script>
+    <div id="mapid"; style = "id-align:center"></div> 
+    <style>
+        #mapid {
+            width: 1000px;
+            height: 600px;
+            margin: auto;
+        }
+    </style>
+    <script>
+        var map = L.map('mapid').setView([35.905, -79.05], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var unccherries = L.icon({
+            iconUrl: 'https://pluspng.com/img-png/cherry-blossom-tree-png-hd-20-free-tree-png-images-cherry-blossom-900.png',
+            iconSize: [50, 50],
+            popupAnchor: [0, 0]
+        });
+        var customPopup = "Cherry Blossom Tree<br/><img src='https://static.wixstatic.com/media/97e86d_64745e2fb4a244f188abf4e4a714e961~mv2_d_1800_2700_s_2.jpg/v1/fill/w_542,h_813,al_c,q_85,usm_0.66_1.00_0.01/97e86d_64745e2fb4a244f188abf4e4a714e961~mv2_d_1800_2700_s_2.webp' width='100px'/>";
+        L.geoJSON(cherry, {
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, { icon: unccherries });
+            }
+        })
+            .bindPopup(customPopup)
+            .addTo(map);
+    </script>
+        <body>
+            <center>
+            <p>Created by Arianna Torello</p>
+            <p>GEOG 456 - 001 | 06 February 2020</p>
+            </center>
+        </body>
