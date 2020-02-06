@@ -1,10 +1,8 @@
 
 <html>
-
     <head>
         <title>Cherry Blossoms at UNC-CH</title>
     </head>
-    
     <body>
         <center><h1>Flowering Cherry Blossom Trees at UNC-CH</h1>
         <p>The map below is an interactive display portraying the recorded locations of flowering cherry blossom trees on the campus of the University of North Carolina at Chapel Hill.</p>
@@ -30,22 +28,21 @@
     </style>
     <script>
         var map = L.map('mapid').setView([35.912064, -79.051230], 17);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+
         var unccherries = L.icon({
             iconUrl: 'cherry-blossom_icon.png',
             iconSize: [50, 50],
             popupAnchor: [0, 0]
         });
+
         var customPopup = "Cherry Blossom Tree<br/><img src='https://static.wixstatic.com/media/97e86d_64745e2fb4a244f188abf4e4a714e961~mv2_d_1800_2700_s_2.jpg/v1/fill/w_542,h_813,al_c,q_85,usm_0.66_1.00_0.01/97e86d_64745e2fb4a244f188abf4e4a714e961~mv2_d_1800_2700_s_2.webp' width='100px'/>";
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         L.geoJSON(cherry, {
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, { icon: unccherries });
-            }
-        })
-            .bindPopup(customPopup)
-            .addTo(map);
+        pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {icon: unccherries});}})
+        .bindPopup(customPopup)
+        .addTo(map)
     </script>
         <body>
             <center>
